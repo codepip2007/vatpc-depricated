@@ -9,24 +9,24 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, #2483C5 0%, #29B473  70%);
 }
 
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: 3.5rem;
     display: flex;
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row .btn-link {
+    .top-row ::deep p, .top-row .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
     }
 
-    .top-row a:first-child {
+    .top-row p:first-child {
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -40,7 +40,7 @@ main {
         justify-content: space-between;
     }
 
-    .top-row a, .top-row .btn-link {
+    .top-row p, .top-row .btn-link {
         margin-left: 0;
     }
 }
@@ -67,4 +67,9 @@ main {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+}
+
+p {
+    margin-top: auto;
+    margin-bottom: auto;
 }

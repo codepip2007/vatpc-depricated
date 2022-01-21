@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">VATPC</a>
+        <a class="navbar-brand fontb" href="">VATSIM Pilot Centre</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,19 +9,42 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
+        <div class="nav-item px-3 fonta">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="howtouse">
+                <span class="oi oi-question-mark" aria-hidden="true"></span> How to use VATPC
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="academy">
+                <span class="oi oi-book" aria-hidden="true"></span> Academy
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" @onclick="ToggolePolicyMenu">
+                <span class="oi oi-document" aria-hidden="true"></span> Policies
+            </NavLink>
+        
+        <div class="@PolMenuCssClass">
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="privacypolicy">
+                   <span class="oi oi-lock-locked" aria-hidden="true"></span> Privacy Policy
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="toc">
+                    <span class="oi oi-link-intact" aria-hidden="true"></span> T&C
+                </NavLink>
+            </div>
+            </div>
+            </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="contact">
+                <span class="oi oi-envelope-open" aria-hidden="true"></span> Contact Us
             </NavLink>
         </div>
     </nav>
@@ -30,10 +53,18 @@
 @code {
     private bool collapseNavMenu = true;
 
+    private bool collapsePolMenu = true;
+
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? PolMenuCssClass => collapsePolMenu ? "polcollapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ToggolePolicyMenu()
+    {
+        collapsePolMenu = !collapsePolMenu;
     }
 }

@@ -1,0 +1,23 @@
+.label {
+    font-size: 15px;
+}
+
+input, select {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.26);
+    border: none;
+    height: 50px;
+    width: 500px;
+}
+
+.submit {
+    background-color: #29b473;
+}
+
+textarea {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.26);
+    border: none;
+    height: 150px;
+    width: 500px;
+}

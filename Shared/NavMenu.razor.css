@@ -4,7 +4,7 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #00000000;
 }
 
 .navbar-brand {
@@ -14,7 +14,7 @@
 .oi {
     width: 2rem;
     font-size: 1.1rem;
-    vertical-align: text-top;
+    vertical-align: middle;
     top: -2px;
 }
 
@@ -59,4 +59,16 @@
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+}
+
+.policy-toggler {
+    display: block;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: white;
+}
+
+.polcollapse {
+    /* Never collapse the sidebar for wide screens */
+    display: none;
 }

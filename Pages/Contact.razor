@@ -1,0 +1,73 @@
+@using System.Net.Mail;
+@page "/contact"
+
+<PageTitle>Contact Us</PageTitle>
+
+<h1 class="fontb">Contact Us!</h1>
+
+<p class="fonta">Hey! We heard you would like to contact us! We would love to hear from you. To contact us please fill out the form below and one of 
+    our staff will be in touch with you shortly!</p>
+
+@*START*@
+<h1>THIS PAGE IS CURRENTLY NOT IN USE</h1>
+@*END*@
+
+<div class="fonta">
+<form method="post">
+    <label class="fontb label" for="name">Your Name</label><br>
+    <input type="text" class="fonta" @bind="customerName" placeholder="Your Name" id="name" required="true"/> <br><br>
+    <label class="fontb label" for="email">Your Email</label><br>
+    <input type="email" class="fonta" @bind="customerEmail" id="email" placeholder="Your Email Address"  required="true"/> <br><br>
+    <label class="fontb label" for="issue">Category</label><br>
+    <select @bind="issue" id="issue">
+        <option value="select" class="fonta">Please select an option...</option>
+        <option value="tech" class="fonta" >Technology Issue/Request</option>
+        <option value="info" class="fonta" >Information Error</option>
+        <option value="general" class="fonta" >General Feedback</option>
+        <option value="other" class="fonta" >Other</option>
+    </select><br><br>
+    <label class="fontb label" for="message">Your Message</label><br>
+    <textarea class="fonta" @bind="customerRequest" id="message" cols="100" rows="4" placeholder="Your Message"  required="true"></textarea>
+    <br><br>
+    <input type="submit" value="Send" class="submit fonta" @onclick="SendMail"/>
+</form>
+</div>
+
+<br>
+<span class="fonta">@Message</span>
+
+@code {
+    private string Message { get; set; } = "";
+    private string issue { get; set; }
+    private string customerRequest { get; set; }
+    private string customerEmail { get; set; }
+    private string customerName { get; set; }
+
+    private void SendMail()
+    {
+        try
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("email"); // Email is from. REPLACE
+                mail.To.Add("email"); // Email is to. REPLACE
+                mail.Subject = $"New ticket from {customerName}";
+                mail.Body = $"Name: {customerName}\nEmail: {customerEmail}\nCategory: {issue}\nMessage: {customerRequest}";
+                mail.IsBodyHtml = false;
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("email", "password"); // Sender email and password REPLACE
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                    Message = "Thank you for contacting us! Our staff will be in touch with you shortly!";
+                    smtp.UseDefaultCredentials = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Message = "Something went wrong! Please contact the site administrator!";
+        }
+    }
+}

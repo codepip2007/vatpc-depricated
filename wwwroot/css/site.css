@@ -1,4 +1,15 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+.fonta {
+    font-family: 'Ubuntu';
+    font-weight: 400;
+}
+
+.fontb {
+    font-family: 'Ubuntu';
+    font-weight: 700;
+}
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -62,3 +73,19 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.indent {
+    text-indent: 20px;
+}
+
+hr {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.boxtxt {
+    margin-left: 10px;
+}
+.shadow {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
