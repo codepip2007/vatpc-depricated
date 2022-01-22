@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject NavigationManager MyNavigationManager
 <PageTitle>VATPC</PageTitle>
 
 <div class="page">
@@ -8,10 +8,24 @@
     </div>
 
     <main>
+        @if (MyNavigationManager.Uri.Contains("academy")) {
         <div class="top-row px-4 fonta">
             <p>VATPC is not affiliated with VATSIM</p><p>FOR FLIGHT SIMULATION USE ONLY</p>
         </div>
-
+        <div class="top-row px-4 fonta">
+            <a class="hover" href="academy">Dashboard</a>
+            <a class="hover" href="academy/vatsim">What is VATSIM?</a>
+            <a class="hover">Communitaction Explained</a>
+            <a class="hover" href="academy/learning">Learning Paths</a>
+            <a class="hover">Exercises</a>
+        </div>
+        }
+        else
+        {
+            <div class="top-row px-4 fonta">
+            <p>VATPC is not affiliated with VATSIM</p><p>FOR FLIGHT SIMULATION USE ONLY</p>
+            </div>
+        }
         <article class="content px-4">
             @Body
         </article>

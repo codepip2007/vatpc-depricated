@@ -1,0 +1,183 @@
+@page "/academy/learning/mlsy/delivery"
+
+<PageTitle>Delivery Clearance</PageTitle>
+
+<h1 class="fontb">Airways Clearance</h1>
+<p class="fonta">An airways clearance is requested by IFR (Instrument Flight Rules) aircraft to reqest clearance into a controlled aerodrome or airspace. Since Melbourne is a Class C
+    (controlled) aerodrome, we will be requesting clearance.
+</p>
+<p class="fonta">Notes:</p>
+<ul class="fonta">
+    <li>The local time is 12:35 PM</li>
+    <li>The UTC time is 0235z</li>
+    <li>We are at bay E7</li>
+    <li>We are a B738</li>
+    <li>Our first waypoint is DOSEL</li>
+    <li>Our callsign is QFA478</li>
+    <li>Our arrival airport is Sydney</li>
+</ul>
+
+<h6 class="fontb">Now lets contruct what we are going to say.</h6>
+
+    <p class="fonta">@clearance</p>
+
+<input type="button" @bind="callsign" @bind:event="oninput" @onclick="AddCallsign" class="btn btn-primary"/>
+<input type="button" @bind="LocalTime" @bind:event="oninput" @onclick="AddLocalTime" class="btn btn-primary"/>
+<input type="button" @bind="ZuluTime" @bind:event="oninput" @onclick="AddZuluTime" class="btn btn-primary"/>
+<input type="button" @bind="Bay" @bind:event="oninput" @onclick="AddBay" class="btn btn-primary"/>
+<input type="button" @bind="aircraft" @bind:event="oninput" @onclick="AddAircraft" class="btn btn-primary"/>
+<input type="button" @bind="waypoint" @bind:event="oninput" @onclick="AddWaypoint" class="btn btn-primary"/>
+<input type="button" @bind="sydney" @bind:event="oninput" @onclick="AddArr" class="btn btn-primary"/>
+<input type="button" @bind="req" @bind:event="oninput" @onclick="AddRequest" class="btn btn-primary"/>
+<input type="button" @bind="mel" @bind:event="oninput" @onclick="AddDep" class="btn btn-primary"/>
+<br>
+<br>
+<input type="button" value="Clear" @onclick="Clear" class="btn btn-danger"/>
+<input type="button" value="Submit" @onclick="Submit" class="btn btn-secondary"/>
+<br>
+<br>
+<div class="shadow" style="display: @display">
+    <h3 class="fontb boxtxt">Feedback @message</h3>
+    <hr>
+    <pre class="fonta boxtxt" style="font-size: 15px;">@feedback</pre>
+</div>
+
+@code {
+    private string clearance { get; set; } = "";
+    private string feedback { get; set; } = "";
+    private string callsign = " QFA478";
+    private string LocalTime = " AT 12:35 PM";
+    private string ZuluTime = " AT 0235z";
+    private string Bay =" BAY E7";
+    private string aircraft = " A B738";
+    private string waypoint = " VIA DOSEL";
+    private string req = " REQUESTING IFR CLEARANCE TO";
+    private string sydney = " SYDNEY";
+    private string mel = " MELBOURNE";
+    private bool requested = false;
+    private string message = "";
+
+    private void AddCallsign()
+    {
+        clearance += callsign;
+    }
+    private void Clear()
+    {
+        clearance = "";
+    }
+    private void AddLocalTime()
+    {
+        clearance += LocalTime;
+    }
+    private void AddZuluTime()
+    {
+        clearance += ZuluTime;
+    }
+    private void AddBay()
+    {
+        clearance += Bay;
+    }
+    private void AddAircraft()
+    {
+        clearance += aircraft;
+    }
+    private void AddWaypoint()
+    {
+        clearance += waypoint;
+    }
+    private void AddArr()
+    {
+        clearance += sydney;
+    }
+    private void AddRequest()
+    {
+        clearance += req;
+    }
+    private void AddDep()
+    {
+        clearance += mel;
+    }
+    private string display = "none";
+    private void Submit()
+    {
+        display = "block";
+        if (requested == true) {
+            message = " - Feedback was updated!";
+            feedback = "";
+        } else {
+            requested = true;
+        }
+        if (clearance == callsign + req + sydney) {
+            requested = true;
+            feedback += "Correct!";
+            feedback += $"\n{callsign}: Correct! Always let ATC know who is talking.";
+            feedback += $"\n{req}: Correct! By saying this you are advising ATC that you would like clearance to enter controlled airspace.";
+            feedback += $"\n{sydney}: Correct! When flying from one aerodrome to another, you will usually request clearance to your arrival airfield.";
+        } else {
+            feedback += "Incorrect!";
+        }
+        if (clearance == "") {
+            requested = true;
+            feedback += "\nIncorrect! You won't get your airways clearance without requesting it!";
+        }
+        if (clearance.Contains(LocalTime )) {
+            requested = true;
+            feedback += $"\n{LocalTime}: Incorrect! You do not need to specify the time in your request.";
+        }
+        if (clearance.Contains(ZuluTime)) {
+            requested = true;
+            feedback += $"\n{ZuluTime}: Incorrect! You do not need to specify the time in your request.";
+        }
+        if (clearance.StartsWith(callsign)) {
+            feedback += $"\n{callsign}: Correct! You want to start with your callsign when requesting airways clearance";
+        } else if (clearance != ""){
+            feedback += $"\n{callsign}: Incorrect! You should start with your callsign when requesting airways clearance";
+        }
+        if (clearance.Contains(Bay)) {
+            requested = true;
+            feedback += $"\n{Bay}: Incorrect! You do not need to state your bay until the taxi call.";
+        }
+        if (clearance.Contains(aircraft)) {
+            requested = true;
+            feedback += $"\n{aircraft}: You should save this for your taxi call.";
+        }
+        if (clearance.Contains(waypoint)) {
+            requested = true;
+            feedback += $"\n{waypoint}: You do not need to state your first waypoint.";
+        }
+        if (clearance.Contains(req)) {
+            requested = true;
+            feedback += $"\n{req} Correct! You should let ATC know that you are requesting clearance.";
+        }
+        if (clearance == sydney) {
+            feedback += "\nYou should add more than your arrival aerodrome";
+        }
+        if (clearance == req) {
+            feedback += "\nYou should add more than your request";
+        }
+        if (clearance == callsign) {
+            feedback += "\nYou should add more than just your callsign";
+        }
+        if (clearance.Contains(sydney)) {
+            requested = true;
+            feedback += $"\n{sydney}: Correct! You usually get clearance to your arrival aerodrome.";
+        }
+        if (clearance.Contains(mel)) {
+            requested = true;
+            feedback += $"\n{mel}: Incorrect! You do not need to state your departure aerodrome.";
+        }
+    }
+}
+
+
+<br>
+<br>
+<br>
+
+<a href="academy/learning/mlsy/route">
+<input type="button" value="Back" class="btn btn-primary"/>
+</a>
+
+<a href="academy/learning/mlsy/ground">
+<input type="button" value="Next" class="btn btn-primary"/>
+</a>
