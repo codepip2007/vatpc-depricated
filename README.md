@@ -5,4 +5,4 @@ This service will be re-written due to website hosting problems. Please bear wit
 VATSIM Pilot Centre
 
 ## Summary
-VATPC is a server developed by Pepijn Colenbrander to help new pilots on the VATSIM network with ATC Communications.
+VATPC is a service developed by Pepijn Colenbrander to help new pilots on the VATSIM network with ATC Communications.
